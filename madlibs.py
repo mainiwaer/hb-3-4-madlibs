@@ -14,6 +14,11 @@ AWESOMENESS = [
     'smashing', 'lovely',
 ]
 
+# SENTENCES = [f"""There once was a { color } { noun } sitting in the Hackbright Lab.
+#     When {{ name }} went to pick it up, it burst into flames in a totally
+#     {{ adjective }} way.""", f"""Once upon a time there was a {{ color }} {{ noun }} that went on a 
+#     {{ adjective }} adventure with {{ name }}."""]
+
 
 @app.route('/')
 def start_here():
@@ -66,12 +71,17 @@ def show_madlib():
     noun = request.args.get("noun")
     adjective = request.args.get("adjective")
 
+    SENTENCES = [f"""There once was a { color } { noun } sitting in the Hackbright Lab.
+    When { name } went to pick it up, it burst into flames in a totally
+    { adjective } way.""", f"""Once upon a time there was a { color } { noun } that went on a 
+    { adjective } adventure with { name }."""]
+
+    sentence = choice(SENTENCES)
+
     # render template madlib
-    return render_template("madlib.html", 
-                            name=name,
-                            color=color,
-                            noun=noun,
-                            adjective=adjective)
+    return render_template("madlib.html",
+                            sentence=sentence
+                            )
 
 
 
